@@ -1,9 +1,0 @@
-import java.util.*;
-
-public class containsDuplicate {
-    public boolean check(int[] nums) {
-        Set set = new HashSet();
-        for(int n : nums) set.add(n);
-        return set.size() != nums.length;
-    }
-}
