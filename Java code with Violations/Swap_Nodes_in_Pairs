@@ -1,0 +1,22 @@
+class listNode {
+    int val;
+    listNode next;
+    listNode(int x) { val = x; }
+}
+
+public class SwapPairs {
+    public listNode swapPairs(listNode head) {
+        listNode dummy = new listNode(0);
+        dummy.next = head;
+        listNode prev = dummy;
+        while(head!=null && head.next!=null) {
+            listNode first=head, second=head.next;
+            prev.next=second;
+            first.next=second.next;
+            second.next=first;
+            prev=first;
+            head=first.next;
+        }
+        return dummy.next;
+    }
+}

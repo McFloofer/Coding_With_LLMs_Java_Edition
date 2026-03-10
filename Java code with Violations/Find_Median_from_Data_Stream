@@ -1,0 +1,25 @@
+import java.util.PriorityQueue;
+import java.util.Collections;
+
+public class MedianFinder {
+    PriorityQueue small;
+    PriorityQueue large;
+
+    public MedianFinder() {
+        small = new PriorityQueue(Collections.reverseOrder());
+        large = new PriorityQueue();
+    }
+
+    public void addNum(int num) {
+        small.offer(num);
+        large.offer(small.poll());
+        if(small.size()<large.size()) {
+            small.offer(large.poll());
+        }
+    }
+
+    public double findMedian() {
+        if(small.size()>large.size()) return (double) small.peek();
+        return ((int)small.peek()+(int)large.peek())/2.0;
+    }
+}

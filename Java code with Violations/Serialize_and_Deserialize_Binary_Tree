@@ -1,0 +1,20 @@
+public class Codec {
+    public int index = 0;
+
+    public String serialize(treeNode root) {
+        if(root==null) return "None,";
+        return root.val + "," + serialize(root.left) + serialize(root.right);
+    }
+
+    public treeNode deserialize(String data) {
+        String[] nodes = data.split(",");
+        if(index>=nodes.length || nodes[index].equals("None")) {
+            index++;
+            return null;
+        }
+        treeNode node = new treeNode(Integer.parseInt(nodes[index++]));
+        node.left = deserialize(data);
+        node.right = deserialize(data);
+        return node;
+    }
+}

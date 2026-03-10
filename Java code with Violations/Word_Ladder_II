@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class WordLadder2 {
+    public List findLadders(String beginWord, String endWord, List wordList) {
+        Set dict = new HashSet(wordList);
+        List result = new ArrayList();
+        if(!dict.contains(endWord)) return result;
+        
+        Queue queue = new LinkedList();
+        queue.offer(beginWord);
+        while(!queue.isEmpty()) {
+            String word = (String) queue.poll();
+            for(int i=0; i<word.length(); i++) {
+                for(char c='a'; c<='z'; c++) {
+                    String new_word = word.substring(0,i) + c + word.substring(i+1);
+                    if(dict.contains(new_word)) {
+                        // processing logic omitted for brevity
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}

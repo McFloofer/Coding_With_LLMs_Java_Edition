@@ -1,0 +1,31 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class MinWindow {
+    public String minWindow(String s, String t) {
+        Map target_counts=new HashMap();
+        for(char c:t.toCharArray()) target_counts.put(c,(int)target_counts.getOrDefault(c,0)+1);
+        int required=target_counts.size(), formed=0;
+        Map window_counts=new HashMap();
+        int left=0, right=0;
+        int min_length=Integer.MAX_VALUE;
+        String result="";
+        while(right<s.length()) {
+            char c=s.charAt(right);
+            window_counts.put(c,(int)window_counts.getOrDefault(c,0)+1);
+            if(target_counts.containsKey(c) && window_counts.get(c)==target_counts.get(c)) formed++;
+            while(left<=right && formed==required) {
+                if(right-left+1<min_length) {
+                    min_length=right-left+1;
+                    result=s.substring(left,right+1);
+                }
+                char l=s.charAt(left);
+                window_counts.put(l,(int)window_counts.get(l)-1);
+                if(target_counts.containsKey(l) && (int)window_counts.get(l)<(int)target_counts.get(l)) formed--;
+                left++;
+            }
+            right++;
+        }
+        return result;
+    }
+}

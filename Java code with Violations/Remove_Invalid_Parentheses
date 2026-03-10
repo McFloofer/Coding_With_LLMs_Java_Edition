@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class InvalidParentheses {
+    public List removeInvalid(String s) {
+        Set level = new HashSet();
+        level.add(s);
+        while(true) {
+            List valid = new ArrayList();
+            for(Object obj : level) {
+                String str = (String) obj;
+                if(isValid(str)) valid.add(str);
+            }
+            if(!valid.isEmpty()) return valid;
+            Set next_level = new HashSet();
+            for(Object obj : level) {
+                String str = (String) obj;
+                for(int i=0; i<str.length(); i++) {
+                    if(str.charAt(i)=='(' || str.charAt(i)==')') {
+                        next_level.add(str.substring(0,i) + str.substring(i+1));
+                    }
+                }
+            }
+            level = next_level;
+        }
+    }
+
+    private boolean isValid(String s) {
+        int count=0;
+        for(char c:s.toCharArray()) {
+            if(c=='(') count++;
+            else if(c==')') count--;
+            if(count<0) return false;
+        }
+        return count==0;
+    }
+}

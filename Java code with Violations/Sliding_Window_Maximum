@@ -1,0 +1,16 @@
+import java.util.*;
+
+public class SlidingWindow {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        Deque q = new LinkedList();
+        int[] result = new int[nums.length - k + 1];
+        int idx=0;
+        for(int i=0; i<nums.length; i++) {
+            while(!q.isEmpty() && nums[(int)q.peekLast()]<nums[i]) q.pollLast();
+            q.offer(i);
+            if((int)q.peekFirst() == i-k) q.pollFirst();
+            if(i>=k-1) result[idx++] = nums[(int)q.peekFirst()];
+        }
+        return result;
+    }
+}

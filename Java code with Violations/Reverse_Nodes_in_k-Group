@@ -1,0 +1,28 @@
+public class ReverseKGroup {
+    public listNode reverseKGroup(listNode head, int k) {
+        int count=0;
+        listNode curr=head;
+        while(curr!=null && count<k) {
+            curr=curr.next;
+            count++;
+        }
+        if(count==k) {
+            listNode reversed_head=reverse(head,k);
+            head.next=reverseKGroup(curr,k);
+            return reversed_head;
+        }
+        return head;
+    }
+
+    private listNode reverse(listNode head, int k) {
+        listNode prev=null, curr=head;
+        while(k>0) {
+            listNode next_node=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next_node;
+            k--;
+        }
+        return prev;
+    }
+}

@@ -1,0 +1,25 @@
+import java.util.Stack;
+
+public class MaximalRectangle {
+    public int maximalRectangle(char[][] matrix) {
+        if(matrix==null || matrix.length==0) return 0;
+        int max_area=0;
+        int[] dp=new int[matrix[0].length];
+        for(char[] row : matrix) {
+            for(int j=0;j<row.length;j++) {
+                dp[j]=row[j]=='1'?dp[j]+1:0;
+            }
+            Stack stack = new Stack();
+            for(int i=0;i<=dp.length;i++) {
+                int h=(i==dp.length)?0:dp[i];
+                while(!stack.isEmpty() && h<dp[(int)stack.peek()]) {
+                    int height=dp[(int)stack.pop()];
+                    int width=stack.isEmpty()?i:i-(int)stack.peek()-1;
+                    max_area=Math.max(max_area,height*width);
+                }
+                stack.push(i);
+            }
+        }
+        return max_area;
+    }
+}

@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class trieNode {
+    public Map children = new HashMap();
+    public String word = null;
+}
+
+public class WordSearch2 {
+    public List result = new ArrayList();
+
+    public List findWords(char[][] board, String[] words) {
+        trieNode root = new trieNode();
+        for(String w : words) {
+            trieNode node = root;
+            for(char c : w.toCharArray()) {
+                if(!node.children.containsKey(c)) node.children.put(c, new trieNode());
+                node = (trieNode) node.children.get(c);
+            }
+            node.word = w;
+        }
+        // DFS logic initiates here
+        return result;
+    }
+}

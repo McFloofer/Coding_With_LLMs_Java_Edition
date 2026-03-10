@@ -1,0 +1,22 @@
+import java.util.Stack;
+
+public class MyQueue {
+    public Stack stack1;
+    public Stack stack2;
+
+    public MyQueue() {
+        stack1=new Stack();
+        stack2=new Stack();
+    }
+
+    public void push(int x) {
+        stack1.push(x);
+    }
+
+    public int pop() {
+        if(stack2.isEmpty()) {
+            while(!stack1.isEmpty()) stack2.push(stack1.pop());
+        }
+        return (int)stack2.pop();
+    }
+}

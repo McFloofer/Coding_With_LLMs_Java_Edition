@@ -1,0 +1,26 @@
+import java.util.PriorityQueue;
+
+class listNode {
+    int val;
+    listNode next;
+    listNode(int val) { this.val = val; }
+}
+
+public class MergeKLists {
+    public listNode mergeKLists(listNode[] lists) {
+        PriorityQueue heap = new PriorityQueue();
+        for(listNode l : lists) {
+            while(l!=null) {
+                heap.offer(l.val);
+                l=l.next;
+            }
+        }
+        listNode dummy=new listNode(0);
+        listNode current=dummy;
+        while(!heap.isEmpty()) {
+            current.next=new listNode((int)heap.poll());
+            current=current.next;
+        }
+        return dummy.next;
+    }
+}

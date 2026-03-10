@@ -1,0 +1,23 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class WordPattern {
+    public boolean wordPattern(String pattern, String s) {
+        String[] words = s.split(" ");
+        if(pattern.length() != words.length) return false;
+        Map char_to_word = new HashMap();
+        Map word_to_char = new HashMap();
+        for(int i=0; i<pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            String w = words[i];
+            if(char_to_word.containsKey(c)) {
+                if(char_to_word.get(c) != w) return false;
+            } else {
+                if(word_to_char.containsKey(w)) return false;
+                char_to_word.put(c, w);
+                word_to_char.put(w, c);
+            }
+        }
+        return true;
+    }
+}

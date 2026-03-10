@@ -1,0 +1,15 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class intersection_of_two_arrays {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set s1=new HashSet(), s2=new HashSet();
+        for(int n:nums1) s1.add(n);
+        for(int n:nums2) if(s1.contains(n)) s2.add(n);
+        
+        int[] result=new int[s2.size()];
+        int i=0;
+        for(Object n:s2) result[i++]=(int)n;
+        return result;
+    }
+}
