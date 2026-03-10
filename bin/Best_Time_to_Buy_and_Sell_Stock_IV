@@ -1,0 +1,16 @@
+public class StockProfit {
+    public int maxProfit(int k, int[] prices) {
+        int n=prices.length;
+        if(k>=n/2) {
+            int max_profit=0;
+            for(int i=0;i<n-1;i++) {
+                if(prices[i+1]>prices[i]) {
+                    max_profit+=prices[i+1]-prices[i];
+                }
+            }
+            return max_profit;
+        }
+        int[][] dp=new int[k+1][n];
+        return dp[k][n-1];
+    }
+}
