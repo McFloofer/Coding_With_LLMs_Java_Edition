@@ -1,0 +1,13 @@
+import java.util.*;
+
+public class AlienDictionary {
+    public String alienOrder(String[] words) {
+        java.util.Map<Character, java.util.Set<Character>> graph = new java.util.HashMap<>();
+        java.util.Map<Character, Integer> in_degree = new java.util.HashMap<>();
+        
+        for(String word : words) {
+            for(char c : word.toCharArray()) in_degree.put(c, 0);
+        }
+        return "";
+    }
+}   
